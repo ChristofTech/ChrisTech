@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Christofer Tech</title>
+
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'></script>
+    <script type='text/javascript' src='js/jquery.ba-hashchange.min.js'></script>
+    <script type='text/javascript' src='js/dynamicpage.js'></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+    var imgArray = [
+        "<img id=\"pic1\" src=\"photos/pic1.jpg\" class=\"imgfluid\"/>",
+        "<img id=\"pic2\" src=\"photos/pic2.png\" class=\"imgfluid\"/>",
+        "<img id=\"pic3\" src=\"photos/pic3.jpg\" class=\"imgfluid\"/>",
+        "<img id=\"pic4\" src=\"photos/pic4.jpg\" class=\"imgfluid\"/>",
+        "<img id=\"pic5\" src=\"photos/pic5.png\" class=\"imgfluid\"/>"
+    ];
+    var imgArray = [
+        "photos/pic1.jpg",
+        "photos/pic2.png",
+        "photos/pic3.jpg",
+        "photos/pic4.jpg",
+        "photos/pic5.png"
+    ];
+    var previousIdx = imgArray.length - 1;
+    var currentIdx = 0;
+    var nextIdx = 1;
+
+    /*
+    For the future, create an image class with width and height, dynamically set the imgfluid class based off of if one is > other
+    var img = new Image();
+    img.onload = function() {
+      alert(this.width + 'x' + this.height);
+    }
+    img.src = 'http://www.google.com/intl/en_ALL/images/logo.gif';
+    */
+    $(document).ready(function(){
+      $(".previous").html(`<img id=\"pic1\" src=\"${imgArray[previousIdx]}\" class=\"imgfluid\"/>`);
+      $(".display").html(`<img id=\"pic2\" src=\"${imgArray[currentIdx]}\" class=\"imgfluid\"/>`);
+      $("body").css('background-image', `url(\"${imgArray[currentIdx]}\")`);
+      $(".next").html(`<img id=\"pic3\" src=\"${imgArray[nextIdx]}\" class=\"imgfluid\"/>`);
+      $("#animate").html("<div class=\"blackBG\"</div>");
+
+      $( "#previous" ).click(function() {
+        $(".blackBG").remove();
+        $("#animate").html("<div class=\"blackBG\"</div>");
+        if (previousIdx == imgArray.length - 1){
+          previousIdx = 0;
+        } else {
+          previousIdx++;
+        }
+        if (currentIdx == imgArray.length - 1){
+          currentIdx = 0;
+        } else {
+          currentIdx++;
+        }
+        if (nextIdx == imgArray.length - 1){
+          nextIdx = 0;
+        } else {
+          nextIdx++;
+        }
+        $(".previous").html(`<img id=\"pic1\" src=\"${imgArray[previousIdx]}\" class=\"imgfluid\"/>`);
+        $(".display").html(`<img id=\"pic2\" src=\"${imgArray[currentIdx]}\" class=\"imgfluid\"/>`);
+        $("body").css('background-image', `url(\"${imgArray[currentIdx]}\")`);
+        $(".next").html(`<img id=\"pic3\" src=\"${imgArray[nextIdx]}\" class=\"imgfluid\"/>`);
+      });
+
+      $( "#next" ).click(function() {
+        $(".blackBG").remove();
+        $("#animate").html("<div class=\"blackBG\"</div>");
+        if (previousIdx == 0){
+          previousIdx = imgArray.length - 1;
+        } else {
+          previousIdx--;
+        }
+        if (currentIdx == 0){
+          currentIdx = imgArray.length - 1;
+        } else {
+          currentIdx--;
+        }
+        if (nextIdx == 0){
+          nextIdx = imgArray.length - 1;
+        } else {
+          nextIdx--;
+        }
+        $(".previous").html(`<img id=\"pic1\" src=\"${imgArray[previousIdx]}\" class=\"imgfluid\"/>`);
+        $(".display").html(`<img id=\"pic2\" src=\"${imgArray[currentIdx]}\" class=\"imgfluid\"/>`);
+        $("body").css('background-image', `url(\"${imgArray[currentIdx]}\")`);
+        $(".next").html(`<img id=\"pic3\" src=\"${imgArray[nextIdx]}\" class=\"imgfluid\"/>`);
+      });
+
+    });
+    </script>
+
+    <style>
+    body {
+     background-image: "";
+     background-color: #ffffff;
+     background-repeat: no-repeat;
+     background-size: cover;
+    }
+
+    .blackBG {
+     background-color: #000000;
+     width: 100vw;
+     height: 100vh;
+     position: absolute;
+     animation-duration: 0.8s;
+     animation-name: fadein;
+     animation-fill-mode: forwards;
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0.8;
+      }
+    }
+
+    .imgfluid {
+      max-width: 100%;
+      max-height: 80vh;
+    }
+
+    .align-items-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .previous, .next {
+      top: 1;
+      left: 1;
+      position: absolute;
+    }
+
+    #pic1, #pic3 {
+        opacity: 0.3;
+    }
+    #pic1:hover, #pic3:hover {
+        opacity: 0.8;
+    }
+
+    .row > div {
+      height: 80vh;
+    }
+    </style>
+  </head>
+
+  <body>
+    <div id="animate"></div>
+
+    <div class='container'>
+
+      <div class="py-3 text-center">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="main_page.html">About me</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="photo_page.html">Photos</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <!--
+      implement hover for "arrow", consider grid at the bottom
+      implement slides
+      fixed container width and height
+      focus on desktop viewing for now
+      -->
+      <div class="row">
+        <div id="previous" class="col-md-2 align-items-center">
+          <div class="previous"></div>
+        </div>
+        <div class="col-md-8 align-items-center">
+          <div class="display"></div>
+        </div>
+        <div id="next" class="arr2 col-md-2 align-items-center">
+          <div class="next"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+</html>
